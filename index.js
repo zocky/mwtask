@@ -1,6 +1,8 @@
 var fs = require('fs');
 
-var opt = require('node-getopt').create([
+var Getopt = require('node-getopt');
+
+getopt = new Getopt([
   ['t' , 'toHtml=ARG'          , 'convert text to HTML'],
   ['f' , 'fromHtml=ARG'        , 'convert HTML to text'],
   ['o' , 'oldHtml=ARG'         , 'patch existing HTML, requires --diff'],
@@ -8,9 +10,10 @@ var opt = require('node-getopt').create([
   ['p' , 'parse'               , 'outputs the parsed non-tree instead of HTML or text'],
   ['h' , 'help'                , 'display this help'],
   ['v' , 'version'             , 'show version']
-])              
-.bindHelp()     
-.parseSystem(); 
+]);
+
+getopt.bindHelp();
+var opt = getopt.parseSystem(); 
 
 if (opt.options.toHtml) {
 
@@ -51,5 +54,7 @@ if (opt.options.toHtml) {
     var html = require('./lib/output-html').output(changed);
     console.log(html);
   }
+} else {
+  getopt.showHelp();
 }
 
