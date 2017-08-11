@@ -1,0 +1,59 @@
+changes 
+= change+ 
+
+change
+= add
+/ replace
+/ delete
+
+add 
+= number:number "a" "\n" lines:lines {
+  return {
+    at: number,
+    len: 0,
+    lines
+  }
+}
+
+replace 
+= range:range "c" "\n" lines:lines {
+  return {
+    at: range.from - 1,
+    len: range.to - range.from + 1,
+    lines
+  }
+}
+
+delete 
+= range:range "d" "\n" {
+  return {
+    at: range.from - 1,
+    len: range.to - range.from + 1,
+  }
+}
+
+range
+= from:number "," to: number {
+  return {from,to}
+}
+/ line:number  {
+  return {from:line,to:line}
+}
+
+lines
+= lines:line+ end {
+  return lines.join('\n');
+}
+line
+= !end text:$([^\n]*) "\n" {
+  return text;
+}
+
+end 
+= ".\n"
+/ "." !.
+
+number 
+= digits:$([0-9]+) {
+  return +digits;
+}
