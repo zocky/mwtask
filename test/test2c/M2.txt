@@ -1,0 +1,5 @@
+== Fix a bug ==
+* Understand bug report
+* Write code
+* Test
+* Verify fix in beta cluster

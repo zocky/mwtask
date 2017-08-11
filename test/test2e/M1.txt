@@ -1,0 +1,14 @@
+== Fix a bug ==
+* Understand bug report
+* Write code
+
+=== Test ===
+* Write tests
+* Run tests
+
+== WIP: QA ==
+* Verify fix in beta cluster
+** Install fix
+** Run tests
+* Resolve bug?
+* Something more?
