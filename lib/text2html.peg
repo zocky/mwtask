@@ -1,0 +1,33 @@
+text
+= sections:section+ {
+  return sections.join('\n');
+}
+section 
+= eol* heading:heading list:list {
+ return `<section>\n${heading}\n${list}\n</section>`;
+}
+
+heading 
+= bars text:$(!bars !eol .)+ bars eol+ {
+  return `  <h2>${text}</h2>`;
+}
+
+bars
+= "=="
+
+list
+= items:item+ {
+  return '  <ol>\n    ' + items.join('\n    ') + '\n  </ol>';
+}
+
+item
+= "*" text:$(!eol .)+ (eol+/eof) {
+  return `<li>${text}</li>`;
+}
+
+eol
+= [\t ]* "\n"
+
+eof 
+= !.
+

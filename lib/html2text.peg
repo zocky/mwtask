@@ -1,0 +1,29 @@
+html
+= sections:section + {
+  return sections.join('');
+}
+
+section
+= _ "<section>" _ heading: heading _ list:list _ "</section>" {
+  return heading + "\n" + list + "\n";
+}
+
+heading
+= "<h2>" text:text "</h2>" {
+  return "=="+text+"=="
+}
+
+list
+= "<ol>" _ items:item+ _ "</ol>" {
+  return items.join('\n');
+}
+
+item
+= _ "<li>" text:text  "</li>" {
+  return "*" + text;
+}
+
+text 
+= $([^<]*)
+_ 
+= [\n\r\t ]*
