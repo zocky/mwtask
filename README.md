@@ -16,5 +16,5 @@ The script also supports multi-level headings and nested lists, but see caveats 
 ### Caveats:
 * Trailing empty lines in the text file produce inconsistency on back-conversion to text, because they're not recorded in the HTML. This is why test1c fails on the first conversion and comparison, but passes when the conversion is retried.
 * The script produces HTML fragments, not complete HTML files.
-* Nested lists don't produce 100% valid HTML, OL tags are nested directly into parent OL, and not into the parent LI. This could be fixed, but I decided not to bother for the current purpose.
+* Nested lists don't produce 100% valid HTML, OL tags are nested directly into parent OL, and not into the parent LI. This could be fixed, but I decided not to bother for the current purpose. Fixing this would also break the current naive HTML parser (which searches for the first matching closing tag, instead of using a proper stack-based or recursive algorithm). It would then have to be replaced with e.g. a SAX parser, but I decided to invest the time into solving the patching task instead.
 * The script accepts lists even before the first heading, which are then not wrapped in a section. It probably shouldn't.
